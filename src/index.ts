@@ -391,7 +391,6 @@ export class Anuncio {
         this.#maxProgressTrackers[this.currentItem.id] ?? 0,
         this.currentItem.progress.value
       );
-      this.currentItem.progress.value = this.currentItem.progress.max;
       this.currentItem.progressEl.classList.remove("active-progress-item");
 
       this.currentItem.close();
@@ -486,6 +485,9 @@ export class Anuncio {
     if (this.#state === "playing") {
       if (this.#currentIndex < this.#items.size - 1) {
         this.closeCurrentItem();
+        // fill current item's progress when going forward;
+        this.currentItem!.progress.value = this.currentItem!.progress.max;
+
         this.#currentIndex += 1;
         this.playCurrentItem();
       } else {
@@ -501,6 +503,9 @@ export class Anuncio {
     if (this.#state === "playing") {
       if (this.#currentIndex > 0) {
         this.closeCurrentItem();
+        // empty current item's progress when going backward;
+        this.currentItem!.progress.value = 0;
+
         this.#currentIndex -= 1;
         this.playCurrentItem();
       }

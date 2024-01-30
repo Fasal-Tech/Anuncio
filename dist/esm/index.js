@@ -745,7 +745,6 @@ class Anuncio {
         var _a;
         if (this.currentItem) {
             __classPrivateFieldGet(this, _Anuncio_maxProgressTrackers, "f")[this.currentItem.id] = Math.max((_a = __classPrivateFieldGet(this, _Anuncio_maxProgressTrackers, "f")[this.currentItem.id]) !== null && _a !== void 0 ? _a : 0, this.currentItem.progress.value);
-            this.currentItem.progress.value = this.currentItem.progress.max;
             this.currentItem.progressEl.classList.remove("active-progress-item");
             this.currentItem.close();
             this.currentItem.mediaEl.style.display = "none";
@@ -833,6 +832,8 @@ class Anuncio {
         if (__classPrivateFieldGet(this, _Anuncio_state, "f") === "playing") {
             if (__classPrivateFieldGet(this, _Anuncio_currentIndex, "f") < __classPrivateFieldGet(this, _Anuncio_items, "f").size - 1) {
                 this.closeCurrentItem();
+                // fill current item's progress when going forward;
+                this.currentItem.progress.value = this.currentItem.progress.max;
                 __classPrivateFieldSet(this, _Anuncio_currentIndex, __classPrivateFieldGet(this, _Anuncio_currentIndex, "f") + 1, "f");
                 this.playCurrentItem();
             }
@@ -848,6 +849,8 @@ class Anuncio {
         if (__classPrivateFieldGet(this, _Anuncio_state, "f") === "playing") {
             if (__classPrivateFieldGet(this, _Anuncio_currentIndex, "f") > 0) {
                 this.closeCurrentItem();
+                // empty current item's progress when going backward;
+                this.currentItem.progress.value = 0;
                 __classPrivateFieldSet(this, _Anuncio_currentIndex, __classPrivateFieldGet(this, _Anuncio_currentIndex, "f") - 1, "f");
                 this.playCurrentItem();
             }
