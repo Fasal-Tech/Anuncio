@@ -543,6 +543,7 @@ _PVideoItem_muted = new WeakMap(), _PVideoItem_id = new WeakMap(), _PVideoItem_s
     //@ts-expect-error ios weird playsinline
     video["webkit-playsinline"] = true;
     video.addEventListener("canplay", () => {
+        alert("Triggering canplay event ");
         if (__classPrivateFieldGet(this, _PVideoItem_state, "f") === "play-queued")
             this.start();
         video.dataset.loading = "false";

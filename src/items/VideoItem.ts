@@ -66,6 +66,7 @@ export class PVideoItem extends Item implements VideoItem {
     video["webkit-playsinline"] = true;
 
     video.addEventListener("canplay", () => {
+      alert("Triggering canplay event ");
       if (this.#state === "play-queued") this.start();
 
       video.dataset.loading = "false";
