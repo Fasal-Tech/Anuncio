@@ -60,13 +60,13 @@ export class PVideoItem extends Item implements VideoItem {
     video.src = videoUrl;
     video.dataset.loading = "true";
     video.id = "anuncio-video-for-" + this.#id;
-    video.preload = "auto";
     video.playsInline = true;
     //@ts-expect-error ios weird playsinline
     video["webkit-playsinline"] = true;
 
+    video.load();
+
     video.addEventListener("canplay", () => {
-      alert("Triggering canplay event ");
       if (this.#state === "play-queued") this.start();
 
       video.dataset.loading = "false";
