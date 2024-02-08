@@ -538,6 +538,10 @@ _PVideoItem_muted = new WeakMap(), _PVideoItem_id = new WeakMap(), _PVideoItem_s
     video.src = videoUrl;
     video.dataset.loading = "true";
     video.id = "anuncio-video-for-" + __classPrivateFieldGet(this, _PVideoItem_id, "f");
+    video.preload = "auto";
+    video.playsInline = true;
+    //@ts-expect-error ios weird playsinline
+    video["webkit-playsinline"] = true;
     video.addEventListener("canplay", () => {
         if (__classPrivateFieldGet(this, _PVideoItem_state, "f") === "play-queued")
             this.start();
